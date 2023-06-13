@@ -1,5 +1,8 @@
 package com.example.acctmanagerapi.core.models;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 public class Event {
     private String type;
     private String origin;
