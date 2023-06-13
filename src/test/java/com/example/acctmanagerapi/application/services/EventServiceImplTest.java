@@ -1,60 +1,54 @@
 package com.example.acctmanagerapi.application.services;
 
-import com.example.acctmanagerapi.core.models.Balance;
+import com.example.acctmanagerapi.application.events.EventHandlerFactory;
+import com.example.acctmanagerapi.application.handlers.EventHandler;
 import com.example.acctmanagerapi.core.models.Event;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
-
 class EventServiceImplTest {
-
     private EventServiceImpl eventService;
 
     @Mock
     private BalanceService balanceService;
 
+    @Mock
+    private EventHandlerFactory eventHandlerFactory;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        eventService = new EventServiceImpl(balanceService);
+        eventService = new EventServiceImpl(balanceService, eventHandlerFactory);
     }
 
     @Test
-    void deposit_ValidEvent_UpdatesBalance() {
+    void processEvent_WithValidEventType_CallsEventHandlerHandleEvent() {
+        // Arrange
         Event event = new Event("deposit", null, "100", 10);
-        Balance balance = new Balance("100", 0);
-        when(balanceService.getBalance(event.getDestination())).thenReturn(balance);
+        EventHandler eventHandler = mock(EventHandler.class);
+        when(eventHandlerFactory.getEventHandler(event.getType())).thenReturn(eventHandler);
 
-        eventService.deposit(event);
+        // Act
+        eventService.processEvent(event);
 
-        verify(balanceService, times(1)).updateBalance(event.getDestination(), 10);
+        // Assert
+        verify(eventHandler, times(1)).handleEvent(event, balanceService);
     }
 
     @Test
-    void withdraw_ValidEvent_UpdatesBalance() {
-        Event event = new Event("withdraw", null, "100", 5);
-        Balance balance = new Balance("100", 10);
-        when(balanceService.getBalance(event.getDestination())).thenReturn(balance);
+    void processEvent_WithInvalidEventType_ThrowsIllegalArgumentException() {
+        // Arrange
+        Event event = new Event("invalid", null, "100", 10);
+        when(eventHandlerFactory.getEventHandler(event.getType())).thenReturn(null);
 
-        eventService.withdraw(event);
-
-        verify(balanceService, times(1)).updateBalance(event.getDestination(), 5);
-    }
-
-    @Test
-    void transfer_ValidEvent_UpdatesBalances() {
-        Event event = new Event("transfer", "100", "200", 10);
-        Balance originBalance = new Balance("100", 20);
-        Balance destinationBalance = new Balance("200", 5);
-        when(balanceService.getBalance(event.getOrigin())).thenReturn(originBalance);
-        when(balanceService.getBalance(event.getDestination())).thenReturn(destinationBalance);
-
-        eventService.transfer(event);
-
-        verify(balanceService, times(1)).updateBalance(event.getOrigin(), 10);
-        verify(balanceService, times(1)).updateBalance(event.getDestination(), 15);
+        // Act & Assert
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> eventService.processEvent(event));
+        assertEquals("Invalid event type: invalid", exception.getMessage());
     }
 }
