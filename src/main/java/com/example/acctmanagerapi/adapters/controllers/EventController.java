@@ -20,8 +20,12 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Transfer> createEvent(@RequestBody Event event) {
+    public ResponseEntity<?> createEvent(@RequestBody Event event) {
         Transfer transfer = eventService.processEvent(event);
-        return ResponseEntity.status(HttpStatus.CREATED).body(transfer);
+        if (transfer != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(transfer);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(0);
+        }
     }
 }

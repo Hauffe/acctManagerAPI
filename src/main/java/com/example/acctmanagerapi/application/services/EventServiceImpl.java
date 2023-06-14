@@ -23,6 +23,13 @@ public class EventServiceImpl implements EventService{
         if (eventHandler == null) {
             throw new IllegalArgumentException("Invalid event type: " + event.getType());
         }
-        return eventHandler.handleEvent(event, balanceService);
+        Transfer transfer = null;
+
+        try{
+            transfer = eventHandler.handleEvent(event, balanceService);
+        }catch (IllegalArgumentException e){
+            transfer = null;
+        }
+        return transfer;
     }
 }

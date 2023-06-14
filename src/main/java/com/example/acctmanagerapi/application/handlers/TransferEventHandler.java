@@ -15,18 +15,24 @@ public class TransferEventHandler implements EventHandler{
         Balance originBalance = balanceService.getBalance(origin);
         Balance destinationBalance = balanceService.getBalance(destination);
 
-        if (originBalance == null || destinationBalance == null) {
+        if (originBalance == null) {
             throw new IllegalArgumentException("Invalid origin or destination account");
         }
+
+        if (destinationBalance == null) {
+            destinationBalance = new Balance(destination, 0);  // Instantiate with initial amount
+            balanceService.updateBalance(destination, 0);
+        }
+
 
         int originCurrentBalance = originBalance.getBalance();
         int destinationCurrentBalance = destinationBalance.getBalance();
 
-        int originNewBalance = originCurrentBalance - amount;
-        int destinationNewBalance = destinationCurrentBalance + amount;
+        originBalance.setBalance(originCurrentBalance - amount);
+        destinationBalance.setBalance(destinationCurrentBalance + amount);
 
-        balanceService.updateBalance(origin, originNewBalance);
-        balanceService.updateBalance(destination, destinationNewBalance);
+        balanceService.updateBalance(origin, originBalance.getBalance());
+        balanceService.updateBalance(destination, destinationBalance.getBalance());
 
         return new Transfer(originBalance, destinationBalance);
     }

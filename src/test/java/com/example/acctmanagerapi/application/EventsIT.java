@@ -1,6 +1,5 @@
 package com.example.acctmanagerapi.application;
 
-import com.example.acctmanagerapi.core.models.Balance;
 import com.example.acctmanagerapi.core.models.Event;
 import com.example.acctmanagerapi.core.models.Transfer;
 import org.junit.jupiter.api.MethodOrderer;
@@ -68,8 +67,8 @@ public class EventsIT {
     @Test
     @Order(6)
     public void testWithdrawFromNonExistingAccount() {
-        Event withdrawEvent = new Event("withdraw", null, "200", 10);
-        ResponseEntity<Integer> response = testRestTemplate.postForEntity("/event", withdrawEvent, Integer.class);
+        Event withdrawEvent = new Event("withdraw", "200", null, 10);
+        ResponseEntity<Object> response = testRestTemplate.postForEntity("/event", withdrawEvent, Object.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(0, response.getBody());
     }
