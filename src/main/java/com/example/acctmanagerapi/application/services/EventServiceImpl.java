@@ -3,6 +3,7 @@ package com.example.acctmanagerapi.application.services;
 import com.example.acctmanagerapi.application.events.EventHandlerFactory;
 import com.example.acctmanagerapi.application.handlers.EventHandler;
 import com.example.acctmanagerapi.core.models.Event;
+import com.example.acctmanagerapi.core.models.Transfer;
 import org.springframework.stereotype.Service;
 
 
@@ -17,11 +18,11 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void processEvent(Event event) {
+    public Transfer processEvent(Event event) {
         EventHandler eventHandler = eventHandlerFactory.getEventHandler(event.getType());
         if (eventHandler == null) {
             throw new IllegalArgumentException("Invalid event type: " + event.getType());
         }
-        eventHandler.handleEvent(event, balanceService);
+        return eventHandler.handleEvent(event, balanceService);
     }
 }

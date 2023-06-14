@@ -8,4 +8,6 @@ public interface BalanceService {
     void updateBalance(String accountId, int newBalance);
 
     void deleteBalance(String accountId);
+
+    void reset();
 }

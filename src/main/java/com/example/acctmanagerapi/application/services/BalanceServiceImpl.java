@@ -34,4 +34,9 @@ public class BalanceServiceImpl implements BalanceService{
     public void deleteBalance(String accountId) {
         balances.remove(accountId);
     }
+
+    @Override
+    public void reset() {
+        balances.clear();
+    }
 }
