@@ -11,4 +11,10 @@ public class Transfer {
     private Balance origin;
     private Balance destination;
 
+
+    public void processTransfer(Integer amount) {
+        origin.withdraw(amount);
+        destination.deposit(amount);
+    }
+
 }

@@ -20,7 +20,7 @@ public class BalanceServiceImpl implements BalanceService{
     }
 
     @Override
-    public void updateBalance(String accountId, int newBalance) {
+    public Balance updateBalance(String accountId, int newBalance) {
         Balance balance = balances.get(accountId);
         if (balance != null) {
             balance.setBalance(newBalance);
@@ -28,6 +28,7 @@ public class BalanceServiceImpl implements BalanceService{
             balance = new Balance(accountId, newBalance);
             balances.put(accountId, balance);
         }
+        return balance;
     }
 
     @Override
