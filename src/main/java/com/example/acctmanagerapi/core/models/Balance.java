@@ -2,8 +2,6 @@ package com.example.acctmanagerapi.core.models;
 
 import lombok.EqualsAndHashCode;
 
-import java.util.Objects;
-
 @EqualsAndHashCode
 public class Balance {
     private String id;
