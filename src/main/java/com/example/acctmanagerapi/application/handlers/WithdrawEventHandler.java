@@ -12,19 +12,13 @@ public class WithdrawEventHandler implements EventHandler{
         Balance origin = balanceService.getBalance(originId);
         int amount = event.getAmount();
 
-        Balance originBalance = balanceService.getBalance(originId);
-
-        if (originBalance == null) {
-            throw new IllegalArgumentException("Account not found: " + origin);
+        if (origin == null) {
+            throw new IllegalArgumentException("Account not found: " + originId);
         }
 
-        int currentBalance = originBalance.getBalance();
-        if (currentBalance < amount) {
-            throw new IllegalArgumentException("Insufficient balance for withdrawal: " + origin);
-        }
+        origin.withdraw(amount);
 
-        int newBalance = currentBalance - amount;
-        balanceService.updateBalance(originId, newBalance);
+        balanceService.updateBalance(originId, origin.getBalance());
 
         return new Transfer(origin, null);
     }

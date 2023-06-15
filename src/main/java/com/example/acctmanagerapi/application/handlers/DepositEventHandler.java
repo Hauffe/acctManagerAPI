@@ -13,12 +13,14 @@ public class DepositEventHandler implements EventHandler{
 
         Balance destination = balanceService.getBalance(destinationId);
         if (destination == null) {
-            destination = new Balance(destinationId, amount);  // Instantiate with initial amount
-            balanceService.updateBalance(destinationId, amount);
-        } else {
-            int newBalance = destination.getBalance() + amount;
-            balanceService.updateBalance(destinationId, newBalance);
+            destination = new Balance(destinationId, 0);
+            balanceService.updateBalance(destinationId, 0);
         }
+
+        destination.deposit(amount);
+
+        balanceService.updateBalance(destinationId, destination.getBalance());
+
         return new Transfer(null, destination);
     }
 }

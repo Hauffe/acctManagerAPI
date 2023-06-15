@@ -30,7 +30,7 @@ public class EventsIT {
 
     @Test
     @Order(2)
-    public void testGetBalance_NonExistingAccount() {
+    public void testGetBalanceNonExistingAccount() {
         ResponseEntity<Object> response = testRestTemplate.getForEntity("/balance?account_id=1234", Object.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(0, response.getBody());

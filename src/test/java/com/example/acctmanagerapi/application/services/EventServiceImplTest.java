@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 class EventServiceImplTest {
     private EventServiceImpl eventService;
@@ -38,17 +36,5 @@ class EventServiceImplTest {
 
         // Assert
         verify(eventHandler, times(1)).handleEvent(event, balanceService);
-    }
-
-    @Test
-    void processEvent_WithInvalidEventType_ThrowsIllegalArgumentException() {
-        // Arrange
-        Event event = new Event("invalid", null, "100", 10);
-        when(eventHandlerFactory.getEventHandler(event.getType())).thenReturn(null);
-
-        // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> eventService.processEvent(event));
-        assertEquals("Invalid event type: invalid", exception.getMessage());
     }
 }

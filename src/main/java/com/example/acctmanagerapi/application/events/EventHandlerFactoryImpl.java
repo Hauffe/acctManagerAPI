@@ -27,6 +27,10 @@ public class EventHandlerFactoryImpl implements EventHandlerFactory{
 
     @Override
     public EventHandler getEventHandler(String eventType) {
+        EventHandler handler = eventHandlers.get(eventType);
+        if(handler == null){
+            throw new IllegalArgumentException("Invalid event type: " + eventType);
+        }
         return eventHandlers.get(eventType);
     }
 

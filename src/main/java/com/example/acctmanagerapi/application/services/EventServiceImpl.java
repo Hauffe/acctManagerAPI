@@ -19,13 +19,9 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public Transfer processEvent(Event event) {
-        EventHandler eventHandler = eventHandlerFactory.getEventHandler(event.getType());
-        if (eventHandler == null) {
-            throw new IllegalArgumentException("Invalid event type: " + event.getType());
-        }
         Transfer transfer;
-
         try{
+            EventHandler eventHandler = eventHandlerFactory.getEventHandler(event.getType());
             transfer = eventHandler.handleEvent(event, balanceService);
         }catch (IllegalArgumentException e){
             transfer = null;
