@@ -24,11 +24,11 @@ Go to the `\acctManagerAPI\target` directory and find the `acctManagerAPI-0.0.1-
 
 Now, if everithing works, please check the `/reset` endpoint at:
 
-        http://localhost:8080/reset
+        POST http://localhost:8080/reset
 
 You may see the following text:
     
-        OK
+        200 OK
 
 #  How it works
 
@@ -100,3 +100,10 @@ You may see the following text:
 
       404 0
 
+# NGROK and ipkiss tests:
+
+* ### Run ngrok
+
+      ngrok http 8080
+
+* ![img.png](img.png)
