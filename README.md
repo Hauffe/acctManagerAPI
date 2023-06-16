@@ -15,7 +15,7 @@ Maven build:
 
 To run the integration tests alone, please run:
 
-        mvn verify
+        mvn install -DskipITs=false
 
 Go to the `\acctManagerAPI\target` directory and find the `acctManagerAPI-0.0.1-SNAPSHOT.jar` file built, then run:
 
