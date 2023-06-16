@@ -20,6 +20,6 @@ public class ResetController {
     @PostMapping
     public ResponseEntity<String> resetState() {
         balanceService.reset();
-        return ResponseEntity.ok("State has been reset.");
+        return ResponseEntity.ok("OK");
     }
 }

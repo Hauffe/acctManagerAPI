@@ -12,6 +12,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -42,7 +44,7 @@ public class EventsIT {
         Event depositEvent = new Event("deposit", null, "100", 10);
         ResponseEntity<Transfer> response = testRestTemplate.postForEntity("/event", depositEvent, Transfer.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("100", response.getBody().getDestination().getId());
+        assertEquals("100", Objects.requireNonNull(response.getBody()).getDestination().getId());
         assertEquals(10, response.getBody().getDestination().getBalance());
     }
 
@@ -52,7 +54,7 @@ public class EventsIT {
         Event depositEvent = new Event("deposit", null, "100", 10);
         ResponseEntity<Transfer> response = testRestTemplate.postForEntity("/event", depositEvent, Transfer.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("100", response.getBody().getDestination().getId());
+        assertEquals("100", Objects.requireNonNull(response.getBody()).getDestination().getId());
         assertEquals(20, response.getBody().getDestination().getBalance());
     }
 
@@ -79,7 +81,7 @@ public class EventsIT {
         Event withdrawEvent = new Event("withdraw",  "100", null,5);
         ResponseEntity<Transfer> response = testRestTemplate.postForEntity("/event", withdrawEvent, Transfer.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("100", response.getBody().getOrigin().getId());
+        assertEquals("100", Objects.requireNonNull(response.getBody()).getOrigin().getId());
         assertEquals(15, response.getBody().getOrigin().getBalance());
     }
 
@@ -89,7 +91,7 @@ public class EventsIT {
         Event transferEvent = new Event("transfer", "100", "300", 15);
         ResponseEntity<Transfer> response = testRestTemplate.postForEntity("/event", transferEvent, Transfer.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals("100", response.getBody().getOrigin().getId());
+        assertEquals("100", Objects.requireNonNull(response.getBody()).getOrigin().getId());
         assertEquals(0, response.getBody().getOrigin().getBalance());
         assertEquals("300", response.getBody().getDestination().getId());
         assertEquals(15, response.getBody().getDestination().getBalance());
