@@ -6,7 +6,7 @@ This Spring boot application is responsible for performing the basic operations 
 
 Please follow the instructions to run this application:
 
-* Used Maven 3.9.1 and JDK 19
+* Used Maven 3.9.1 and JDK 21
 
 Maven build:
 
@@ -104,6 +104,6 @@ You may see the following text:
 
 * ### Run ngrok
 
-      ngrok http 8080
+      ngrok http 8082
 
 * ![img.png](img.png)
