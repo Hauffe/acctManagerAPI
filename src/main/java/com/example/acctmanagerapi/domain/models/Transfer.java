@@ -1,4 +1,4 @@
-package com.example.acctmanagerapi.core.models;
+package com.example.acctmanagerapi.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

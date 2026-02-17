@@ -1,4 +1,4 @@
-package com.example.acctmanagerapi.core.models;
+package com.example.acctmanagerapi.infrastructure.dto;
 
 import lombok.EqualsAndHashCode;
 

@@ -1,8 +1,8 @@
-package com.example.acctmanagerapi.adapters.controllers;
+package com.example.acctmanagerapi.infrastructure.controllers;
 
 import com.example.acctmanagerapi.application.services.EventService;
-import com.example.acctmanagerapi.core.models.Event;
-import com.example.acctmanagerapi.core.models.Transfer;
+import com.example.acctmanagerapi.infrastructure.dto.Event;
+import com.example.acctmanagerapi.domain.models.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

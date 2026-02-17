@@ -2,8 +2,8 @@ package com.example.acctmanagerapi.application.services;
 
 import com.example.acctmanagerapi.application.events.EventHandlerFactory;
 import com.example.acctmanagerapi.application.handlers.EventHandler;
-import com.example.acctmanagerapi.core.models.Event;
-import com.example.acctmanagerapi.core.models.Transfer;
+import com.example.acctmanagerapi.infrastructure.dto.Event;
+import com.example.acctmanagerapi.domain.models.Transfer;
 import org.springframework.stereotype.Service;
 
 

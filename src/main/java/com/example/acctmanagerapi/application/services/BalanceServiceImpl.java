@@ -1,6 +1,6 @@
 package com.example.acctmanagerapi.application.services;
 
-import com.example.acctmanagerapi.core.models.Balance;
+import com.example.acctmanagerapi.domain.models.Balance;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

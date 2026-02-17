@@ -1,9 +1,9 @@
 package com.example.acctmanagerapi.application.handlers;
 
 import com.example.acctmanagerapi.application.services.BalanceService;
-import com.example.acctmanagerapi.core.models.Balance;
-import com.example.acctmanagerapi.core.models.Event;
-import com.example.acctmanagerapi.core.models.Transfer;
+import com.example.acctmanagerapi.domain.models.Balance;
+import com.example.acctmanagerapi.infrastructure.dto.Event;
+import com.example.acctmanagerapi.domain.models.Transfer;
 
 public class TransferEventHandler implements EventHandler{
     @Override

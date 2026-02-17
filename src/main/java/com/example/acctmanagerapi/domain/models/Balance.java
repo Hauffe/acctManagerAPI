@@ -1,4 +1,4 @@
-package com.example.acctmanagerapi.core.models;
+package com.example.acctmanagerapi.domain.models;
 
 import lombok.EqualsAndHashCode;
 

@@ -1,4 +1,4 @@
-package com.example.acctmanagerapi.adapters.controllers;
+package com.example.acctmanagerapi.infrastructure.controllers;
 
 import com.example.acctmanagerapi.application.services.BalanceService;
 import org.springframework.beans.factory.annotation.Autowired;

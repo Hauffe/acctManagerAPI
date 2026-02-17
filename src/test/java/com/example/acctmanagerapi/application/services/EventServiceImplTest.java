@@ -2,7 +2,7 @@ package com.example.acctmanagerapi.application.services;
 
 import com.example.acctmanagerapi.application.events.EventHandlerFactory;
 import com.example.acctmanagerapi.application.handlers.EventHandler;
-import com.example.acctmanagerapi.core.models.Event;
+import com.example.acctmanagerapi.infrastructure.dto.Event;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

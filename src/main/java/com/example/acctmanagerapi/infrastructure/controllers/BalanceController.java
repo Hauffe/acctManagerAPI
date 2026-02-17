@@ -1,7 +1,7 @@
-package com.example.acctmanagerapi.adapters.controllers;
+package com.example.acctmanagerapi.infrastructure.controllers;
 
 import com.example.acctmanagerapi.application.services.BalanceService;
-import com.example.acctmanagerapi.core.models.Balance;
+import com.example.acctmanagerapi.domain.models.Balance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

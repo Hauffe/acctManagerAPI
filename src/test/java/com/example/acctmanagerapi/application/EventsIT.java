@@ -1,7 +1,7 @@
 package com.example.acctmanagerapi.application;
 
-import com.example.acctmanagerapi.core.models.Event;
-import com.example.acctmanagerapi.core.models.Transfer;
+import com.example.acctmanagerapi.infrastructure.dto.Event;
+import com.example.acctmanagerapi.domain.models.Transfer;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
